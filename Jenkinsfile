@@ -26,7 +26,7 @@ pipeline {
                 script {
                     def scannerHome = tool 'SonarQubeScanner'
 
-                    withSonarQubeEnv('SonarQube') {
+                    withSonarQubeEnv('sonar-server') {
                         dir('p1_0') {
                             bat "\"${scannerHome}\\bin\\sonar-scanner.bat\""
                         }
