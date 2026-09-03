@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Course Catalog - LMS Platform{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="h3 fw-bold mb-0">Course Management</h2>
+    {% if currentUser.isAuthenticated and currentUser.role == 'admin' %}
+        <a href="{{ url_for('course.createCourse') }}" class="btn btn-primary btn-sm">+ Create Course</a>
+    {% endif %}
+</div>
+
+{% if courses %}
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col" class="ps-3">ID</th>
+                            <th scope="col">Course Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col" class="text-end pe-3">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for course in courses %}
+                        <tr>
+                            <td class="ps-3 fw-bold text-muted">#{{ course.id }}</td>
+                            <td>
+                                <a href="{{ url_for('course.getCourse', courseId=course.id) }}" class="fw-semibold text-decoration-none">
+                                    {{ course.courseName or course.course_name }}
+                                </a>
+                            </td>
+                            <td class="text-secondary small">
+                                {{ (course.description[:90] ~ '...') if course.description and course.description|length > 90 else (course.description or 'No description provided') }}
+                            </td>
+                            <td class="text-end pe-3">
+                                <a href="{{ url_for('course.getCourse', courseId=course.id) }}" class="btn btn-outline-secondary btn-sm me-1">View</a>
+                                {% if currentUser.isAuthenticated and currentUser.role == 'admin' %}
+                                    <a href="{{ url_for('course.updateCourse', courseId=course.id) }}" class="btn btn-outline-primary btn-sm me-1">Edit</a>
+                                    
+                                    <form action="{{ url_for('course.deleteCourse', courseId=course.id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this course?');">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                                    </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="card text-center p-5 shadow-sm border-0">
+        <div class="card-body">
+            <h5 class="text-muted">No courses found</h5>
+            <p class="text-secondary small mb-3">Get started by creating your first course in the platform.</p>
+            {% if currentUser.isAuthenticated and currentUser.role == 'admin' %}
+                <a href="{{ url_for('course.createCourse') }}" class="btn btn-primary btn-sm">+ Create Course</a>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

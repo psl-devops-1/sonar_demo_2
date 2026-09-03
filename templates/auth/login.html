@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Login - LMS Platform{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="card-title mb-0">Login</h4>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('auth.login') }}" method="POST" novalidate>
+                    {{ form.hidden_tag() if form.hidden_tag }}
+
+                    <!-- Email Field -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""), id="email", placeholder="enter your email") }}
+                        {% for error in form.email.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        {{ form.password(class="form-control" + (" is-invalid" if form.password.errors else ""), id="password", placeholder="enter password") }}
+                        {% for error in form.password.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Sign In</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center text-muted">
+                Don't have an account? <a href="{{ url_for('auth.register') }}">Register here</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Quizzes - LMS Platform{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="h3 fw-bold mb-0">Quizzes</h2>
+    {% if currentUser.isAuthenticated and currentUser.role == 'instructor' %}
+        <a href="{{ url_for('quiz.createQuiz', courseInstructorId=courseInstructorId) }}" class="btn btn-primary btn-sm">+ Create Quiz</a>
+    {% endif %}
+</div>
+
+{% if quizzes %}
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col" class="ps-3">ID</th>
+                            <th scope="col">Quiz Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col" class="text-end pe-3">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for quiz in quizzes %}
+                        <tr>
+                            <td class="ps-3 fw-bold text-muted">#{{ quiz.id }}</td>
+                            <td>
+                                <a href="{{ url_for('quiz.getQuiz', quizId=quiz.id) }}" class="fw-semibold text-decoration-none">
+                                    {{ quiz.quiz_name }}
+                                </a>
+                            </td>
+                            <td class="text-secondary small">
+                                {{ quiz.description or 'No description provided' }}
+                            </td>
+                            <td class="text-end pe-3">
+                                {% if currentUser.role == 'student' %}
+                                    <a href="{{ url_for('quiz.takeQuiz', quizId=quiz.id) }}" class="btn btn-outline-primary btn-sm">Take Quiz</a>
+                                {% else %}
+                                    <a href="{{ url_for('quiz.getQuiz', quizId=quiz.id) }}" class="btn btn-outline-secondary btn-sm me-1">Manage</a>
+                                    <form action="{{ url_for('quiz.deleteQuiz', quizId=quiz.id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this quiz?');">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                                    </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="card text-center p-5 shadow-sm border-0">
+        <div class="card-body">
+            <h5 class="text-muted">No quizzes found</h5>
+            <p class="text-secondary small mb-3">
+                {% if currentUser.role == 'instructor' %}
+                    Create your first quiz for this course.
+                {% else %}
+                    No quizzes have been published for this course yet.
+                {% endif %}
+            </p>
+            {% if currentUser.isAuthenticated and currentUser.role == 'instructor' %}
+                <a href="{{ url_for('quiz.createQuiz', courseInstructorId=courseInstructorId) }}" class="btn btn-primary btn-sm">+ Create Quiz</a>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

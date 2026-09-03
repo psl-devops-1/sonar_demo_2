@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}Student Dashboard - LMS Platform{% endblock %}
+
+{% block content %}
+
+<div class="py-4">
+
+    <!-- Dashboard Header -->
+    <div class="mb-4">
+
+        <h2 class="fw-bold mb-1">
+            Student Dashboard
+        </h2>
+
+        <p class="text-muted mb-0">
+            View your courses and track your learning progress.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <!-- My Courses -->
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body">
+
+                    <h5 class="fw-bold">
+                        My Courses
+                    </h5>
+
+                    <p class="text-muted small">
+                        View the courses you are currently enrolled in.
+                    </p>
+
+                    <a
+                        href="{{ url_for('enrollment.listMyEnrollments') }}"
+                        class="btn btn-primary btn-sm"
+                    >
+                        My Courses
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Browse Courses -->
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body">
+
+                    <h5 class="fw-bold">
+                        Browse Courses
+                    </h5>
+
+                    <p class="text-muted small">
+                        Find courses and enroll to start learning.
+                    </p>
+
+                    <a
+                        href="{{ url_for('course.listCourses') }}"
+                        class="btn btn-outline-primary btn-sm"
+                    >
+                        Browse Courses
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Progress -->
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body">
+
+                    <h5 class="fw-bold">
+                        Learning Progress
+                    </h5>
+
+                    <p class="text-muted small">
+                        Track completed lessons and course progress.
+                    </p>
+
+                    <!-- Progress UI will be connected
+                         after enrollment flow is complete -->
+                    <button
+                        type="button"
+                        class="btn btn-outline-primary btn-sm"
+                        disabled
+                    >
+                        View Progress
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Continue Learning -->
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body">
+
+                    <h5 class="fw-bold">
+                        Continue Learning
+                    </h5>
+
+                    <p class="text-muted small">
+                        Continue from where you last stopped.
+                    </p>
+
+                    <!-- Continue Learning will be connected
+                         after lesson progress UI is complete -->
+                    <button
+                        type="button"
+                        class="btn btn-outline-primary btn-sm"
+                        disabled
+                    >
+                        Continue
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

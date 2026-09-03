@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - LMS Platform{% endblock %}
+
+{% block content %}
+
+<div class="py-4">
+
+    <!-- Dashboard Header -->
+    <div class="mb-4">
+        <h2 class="fw-bold mb-1">
+            Admin Dashboard
+        </h2>
+
+        <p class="text-muted mb-0">
+            Manage courses, modules, lessons and instructor assignments.
+        </p>
+    </div>
+
+
+    <!-- Dashboard Cards -->
+    <div class="row g-4">
+
+        <!-- Courses -->
+        <div class="col-md-4">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body">
+
+                    <h5 class="fw-bold">
+                        Courses
+                    </h5>
+
+                    <p class="text-muted small">
+                        Create, update and manage courses.
+                    </p>
+
+                    <a
+                        href="{{ url_for('course.listCourses') }}"
+                        class="btn btn-primary btn-sm"
+                    >
+                        Manage Courses
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Instructor Assignments -->
+        <div class="col-md-4">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body">
+
+                    <h5 class="fw-bold">
+                        Instructor Assignments
+                    </h5>
+
+                    <p class="text-muted small">
+                        Assign instructors to courses.
+                    </p>
+
+                    <!-- We'll connect this later -->
+                    <button
+                        type="button"
+                        class="btn btn-outline-primary btn-sm"
+                        disabled
+                    >
+                        Manage Assignments
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LMS Structure -->
+        <div class="col-md-4">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body">
+
+                    <h5 class="fw-bold">
+                        Learning Structure
+                    </h5>
+
+                    <p class="text-muted small">
+                        Manage modules and lessons inside courses.
+                    </p>
+
+                    <a
+                        href="{{ url_for('course.listCourses') }}"
+                        class="btn btn-outline-primary btn-sm"
+                    >
+                        View Courses
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

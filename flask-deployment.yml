@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: flask-deployment
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: flask
+
+  template:
+    metadata:
+      labels:
+        app: flask
+
+    spec:
+      containers:
+        - name: flask
+          image: flask-lms:latest
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 5000
+
+          env:
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: flask-secret
+                  key: SECRET_KEY
+
+            - name: JWT_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: JWT_SECRET_KEY
+
+            - name: DATABASE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: DATABASE_URI
+
+            - name: TEST_DATABASE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: TEST_DATABASE_URI
+
+            - name: FLASK_APP
+              value: "app.py"
+
+            - name: FLASK_ENV
+              value: "development"
+
+            - name: FLASK_DEBUG
+              value: "1"
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+

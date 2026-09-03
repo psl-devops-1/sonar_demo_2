@@ -1,0 +1,98 @@
+2026-08-25 11:24:18,979 [INFO] __main__: Flask appplication initialed successfully
+2026-08-25 11:24:19,103 [INFO] werkzeug: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-08-25 11:24:19,103 [INFO] werkzeug: [33mPress CTRL+C to quit[0m
+2026-08-25 11:24:19,109 [INFO] werkzeug:  * Restarting with stat
+2026-08-25 11:24:20,765 [INFO] __main__: Flask appplication initialed successfully
+2026-08-25 11:24:20,822 [WARNING] werkzeug:  * Debugger is active!
+2026-08-25 11:24:20,834 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-25 11:24:42,142 [INFO] werkzeug: 127.0.0.1 - - [25/Aug/2026 11:24:42] "GET /login HTTP/1.1" 200 -
+2026-08-25 11:24:42,260 [INFO] werkzeug: 127.0.0.1 - - [25/Aug/2026 11:24:42] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-08-25 11:24:44,596 [INFO] werkzeug: 127.0.0.1 - - [25/Aug/2026 11:24:44] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-08-25 11:24:44,629 [INFO] werkzeug: 127.0.0.1 - - [25/Aug/2026 11:24:44] "GET /dashboard HTTP/1.1" 200 -
+2026-08-25 11:24:46,244 [INFO] werkzeug: 127.0.0.1 - - [25/Aug/2026 11:24:46] "GET /instructor/courses HTTP/1.1" 200 -
+2026-08-25 11:24:47,959 [INFO] werkzeug: 127.0.0.1 - - [25/Aug/2026 11:24:47] "GET /courses/11 HTTP/1.1" 200 -
+2026-08-25 11:24:49,257 [INFO] werkzeug: 127.0.0.1 - - [25/Aug/2026 11:24:49] "GET /courses/11/modules HTTP/1.1" 200 -
+2026-08-25 11:26:08,601 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\tests\\conftest.py', reloading
+2026-08-25 11:26:09,128 [INFO] werkzeug:  * Restarting with stat
+2026-08-25 11:26:11,498 [INFO] __main__: Flask appplication initialed successfully
+2026-08-25 11:26:11,561 [WARNING] werkzeug:  * Debugger is active!
+2026-08-25 11:26:11,570 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-25 11:26:22,406 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\tests\\conftest.py', reloading
+2026-08-25 11:26:22,676 [INFO] werkzeug:  * Restarting with stat
+2026-08-25 11:26:24,688 [INFO] __main__: Flask appplication initialed successfully
+2026-08-25 11:26:24,747 [WARNING] werkzeug:  * Debugger is active!
+2026-08-25 11:26:24,760 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-25 11:26:35,545 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\tests\\conftest.py', reloading
+2026-08-25 11:26:35,947 [INFO] werkzeug:  * Restarting with stat
+2026-08-25 11:26:37,698 [INFO] __main__: Flask appplication initialed successfully
+2026-08-25 11:26:37,747 [WARNING] werkzeug:  * Debugger is active!
+2026-08-25 11:26:37,755 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-25 11:31:19,209 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\tests\\conftest.py', reloading
+2026-08-25 11:31:19,569 [INFO] werkzeug:  * Restarting with stat
+2026-08-25 11:31:22,140 [INFO] __main__: Flask appplication initialed successfully
+2026-08-25 11:31:22,249 [WARNING] werkzeug:  * Debugger is active!
+2026-08-25 11:31:22,266 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-25 11:31:51,530 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\tests\\conftest.py', reloading
+2026-08-25 11:31:51,976 [INFO] werkzeug:  * Restarting with stat
+2026-08-25 11:31:54,189 [INFO] __main__: Flask appplication initialed successfully
+2026-08-25 11:31:54,244 [WARNING] werkzeug:  * Debugger is active!
+2026-08-25 11:31:54,244 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-25 11:32:29,987 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\tests\\conftest.py', reloading
+2026-08-25 11:32:30,409 [INFO] werkzeug:  * Restarting with stat
+2026-08-25 11:32:33,101 [INFO] __main__: Flask appplication initialed successfully
+2026-08-25 11:32:33,159 [WARNING] werkzeug:  * Debugger is active!
+2026-08-25 11:32:33,159 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-25 11:32:42,452 [INFO] werkzeug: 127.0.0.1 - - [25/Aug/2026 11:32:42] "GET /courses HTTP/1.1" 200 -
+2026-08-25 11:32:43,858 [INFO] werkzeug: 127.0.0.1 - - [25/Aug/2026 11:32:43] "GET /courses/1 HTTP/1.1" 200 -
+2026-08-25 11:38:47,792 [INFO] app: Flask appplication initialed successfully
+2026-08-31 12:05:32,099 [INFO] app: Flask appplication initialed successfully
+2026-08-31 14:03:37,837 [INFO] __main__: Flask appplication initialed successfully
+2026-08-31 14:03:37,920 [INFO] werkzeug: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-08-31 14:03:37,920 [INFO] werkzeug: [33mPress CTRL+C to quit[0m
+2026-08-31 14:03:37,928 [INFO] werkzeug:  * Restarting with stat
+2026-08-31 14:03:39,184 [INFO] __main__: Flask appplication initialed successfully
+2026-08-31 14:03:39,217 [WARNING] werkzeug:  * Debugger is active!
+2026-08-31 14:03:39,226 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-31 14:03:41,922 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:03:41] "GET /login HTTP/1.1" 200 -
+2026-08-31 14:03:42,153 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:03:42] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-08-31 14:03:44,635 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:03:44] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-08-31 14:03:44,652 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:03:44] "GET /dashboard HTTP/1.1" 200 -
+2026-08-31 14:03:46,429 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:03:46] "[32mPOST /logout HTTP/1.1[0m" 302 -
+2026-08-31 14:03:46,736 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:03:46] "GET /login HTTP/1.1" 200 -
+2026-08-31 14:06:19,368 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\app.py', reloading
+2026-08-31 14:06:19,729 [INFO] werkzeug:  * Restarting with stat
+2026-08-31 14:06:21,062 [INFO] __main__: Flask appplication initialed successfully
+2026-08-31 14:06:21,089 [WARNING] werkzeug:  * Debugger is active!
+2026-08-31 14:06:21,104 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-31 14:06:25,687 [INFO] __main__: Flask appplication initialed successfully
+2026-08-31 14:06:25,742 [INFO] werkzeug: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:3000
+2026-08-31 14:06:25,742 [INFO] werkzeug: [33mPress CTRL+C to quit[0m
+2026-08-31 14:06:25,744 [INFO] werkzeug:  * Restarting with stat
+2026-08-31 14:06:27,276 [INFO] __main__: Flask appplication initialed successfully
+2026-08-31 14:06:27,310 [WARNING] werkzeug:  * Debugger is active!
+2026-08-31 14:06:27,318 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-31 14:06:33,102 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:06:33] "GET /login HTTP/1.1" 200 -
+2026-08-31 14:06:33,204 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:06:33] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-08-31 14:07:04,792 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:07:04] "POST /login HTTP/1.1" 200 -
+2026-08-31 14:07:18,341 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\app.py', reloading
+2026-08-31 14:07:18,715 [INFO] werkzeug:  * Restarting with stat
+2026-08-31 14:07:20,249 [INFO] __main__: Flask appplication initialed successfully
+2026-08-31 14:07:20,280 [WARNING] werkzeug:  * Debugger is active!
+2026-08-31 14:07:20,286 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-31 14:07:28,809 [INFO] __main__: Flask appplication initialed successfully
+2026-08-31 14:07:28,849 [INFO] werkzeug: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-08-31 14:07:28,849 [INFO] werkzeug: [33mPress CTRL+C to quit[0m
+2026-08-31 14:07:28,851 [INFO] werkzeug:  * Restarting with stat
+2026-08-31 14:07:29,908 [INFO] __main__: Flask appplication initialed successfully
+2026-08-31 14:07:29,941 [WARNING] werkzeug:  * Debugger is active!
+2026-08-31 14:07:29,951 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-31 14:07:30,952 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:07:30] "GET /login HTTP/1.1" 200 -
+2026-08-31 14:07:32,551 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:07:32] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-08-31 14:07:32,551 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:07:32] "GET /dashboard HTTP/1.1" 200 -
+2026-08-31 14:07:34,385 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:07:34] "[32mPOST /logout HTTP/1.1[0m" 302 -
+2026-08-31 14:07:34,391 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:07:34] "GET /login HTTP/1.1" 200 -
+2026-09-02 12:05:52,987 [INFO] app: Flask appplication initialed successfully

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Register - LMS Platform{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h4 class="card-title mb-0">Create Account</h4>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('auth.register') }}" method="POST" novalidate>
+                    {{ form.hidden_tag() if form.hidden_tag }}
+
+                    <!-- Full Name -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name</label>
+                        {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else ""), id="name", placeholder="John Doe") }}
+                        {% for error in form.name.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Email Address -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""), id="email", placeholder="name@example.com") }}
+                        {% for error in form.email.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        {{ form.password(class="form-control" + (" is-invalid" if form.password.errors else ""), id="password", placeholder="choose a password") }}
+                        {% for error in form.password.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        {{ form.confirmPassword(class="form-control" + (" is-invalid" if form.confirmPassword.errors else ""), id="confirmPassword", placeholder="choose a password") }}
+                        {% for error in form.confirmPassword.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">Register</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center text-muted">
+                Already registered? <a href="{{ url_for('auth.login') }}">Login here</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

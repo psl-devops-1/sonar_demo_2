@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ lesson.lessonName or lesson.lesson_name }} - Lesson
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <!-- Back -->
+    <div class="mb-3">
+
+        <a
+            href="#"
+            class="text-decoration-none text-muted small"
+        >
+            &larr; Back to Lessons
+        </a>
+
+    </div>
+
+
+    <!-- Lesson -->
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-white py-3">
+
+            <div class="d-flex justify-content-between align-items-start">
+
+                <div>
+
+                    <h2 class="h4 fw-bold mb-1">
+
+                        {{
+                            lesson.lessonName
+                            or lesson.lesson_name
+                        }}
+
+                    </h2>
+
+                    <p class="text-muted small mb-0">
+
+                        Lesson #{{ lesson.id }}
+
+                    </p>
+
+                </div>
+
+
+                {% if currentUser.role == 'admin' %}
+
+                    <a
+                        href="{{
+                            url_for(
+                                'lesson.updateLesson',
+                                lessonId=lesson.id
+                            )
+                        }}"
+                        class="btn btn-outline-primary btn-sm"
+                    >
+                        Edit Lesson
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <div class="card-body p-4">
+
+            {% if lesson.content %}
+
+                <div class="lesson-content">
+
+                    {{ lesson.content }}
+
+                </div>
+
+            {% else %}
+
+                <p class="text-muted mb-0">
+                    No content has been added to this lesson yet.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+        <div class="card shadow-sm border-0 mt-4">
+
+
+        {% if currentUser.role == 'student' and enrollmentId %}
+
+                <div class="border-top mt-4 pt-4">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <h6 class="fw-bold mb-1">
+                                Lesson Progress
+                            </h6>
+
+                            <p class="text-muted small mb-0">
+                                Mark this lesson as completed when you finish it.
+                            </p>
+                        </div>
+
+                        <form
+                            method="POST"
+                            action="{{ url_for(
+                                'lessonProgress.markLessonComplete',
+                                enrollmentId=enrollmentId,
+                                lessonId=lesson.id
+                            ) }}"
+                        >
+
+                            <input
+                                type="hidden"
+                                name="completed"
+                                value="true"
+                            >
+
+                            <button
+                                type="submit"
+                                class="btn
+                                    {% if progress and progress.completed %}
+                                        btn-success
+                                    {% else %}
+                                        btn-outline-success
+                                    {% endif %}
+                                "
+                                {% if progress and progress.completed %}
+                                    disabled
+                                {% endif %}
+                            >
+
+                                {% if progress and progress.completed %}
+                                    ✓ Completed
+                                {% else %}
+                                    Mark as Completed
+                                {% endif %}
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+        {% endif %}
+
+    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+        <h5 class="fw-bold mb-0">Materials</h5>
+
+        <div>
+            <a
+                href="{{ url_for(
+                    'material.listMaterials',
+                    lessonId=lesson.id
+                ) }}"
+                class="btn btn-outline-primary btn-sm"
+            >
+                View Materials
+            </a>
+
+            {% if currentUser.role == 'instructor' %}
+                <a
+                    href="{{ url_for(
+                        'material.uploadMaterial',
+                        lessonId=lesson.id
+                    ) }}"
+                    class="btn btn-primary btn-sm"
+                >
+                    + Upload Material
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card-body">
+        <p class="text-muted small mb-0">
+            View the learning materials associated with this lesson.
+        </p>
+    </div>
+
+</div>
+
+    </div>
+
+</div>
+
+{% endblock %}

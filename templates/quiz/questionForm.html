@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Add Question - LMS Platform{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <h4 class="fw-bold mb-4">Add Question</h4>
+                <form method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+
+                    <div class="mb-3">
+                        {{ form.questionText.label(class="form-label") }}
+                        {{ form.questionText(class="form-control" ~ (" is-invalid" if form.questionText.errors else ""), rows=3) }}
+                        {% for error in form.questionText.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.option1.label(class="form-label") }}
+                            {{ form.option1(class="form-control" ~ (" is-invalid" if form.option1.errors else "")) }}
+                            {% for error in form.option1.errors %}
+                                <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.option2.label(class="form-label") }}
+                            {{ form.option2(class="form-control" ~ (" is-invalid" if form.option2.errors else "")) }}
+                            {% for error in form.option2.errors %}
+                                <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.option3.label(class="form-label") }}
+                            {{ form.option3(class="form-control" ~ (" is-invalid" if form.option3.errors else "")) }}
+                            {% for error in form.option3.errors %}
+                                <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.option4.label(class="form-label") }}
+                            {{ form.option4(class="form-control" ~ (" is-invalid" if form.option4.errors else "")) }}
+                            {% for error in form.option4.errors %}
+                                <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8 mb-3">
+                            {{ form.correctOption.label(class="form-label") }}
+                            {{ form.correctOption(class="form-select") }}
+                            <div class="form-text">Only fill in the options you want to use; leave the rest blank.</div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            {{ form.points.label(class="form-label") }}
+                            {{ form.points(class="form-control" ~ (" is-invalid" if form.points.errors else "")) }}
+                            {% for error in form.points.errors %}
+                                <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{{ url_for('quiz.getQuiz', quizId=quizId) }}" class="btn btn-outline-secondary btn-sm">Cancel</a>
+                        {{ form.submit(class="btn btn-primary btn-sm") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

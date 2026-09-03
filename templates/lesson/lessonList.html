@@ -1,0 +1,285 @@
+{% extends "base.html" %}
+
+{% block title %}Lessons - LMS Platform{% endblock %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <!-- Back to Module -->
+    <div class="mb-3">
+
+        <a
+            href="#"
+            class="text-decoration-none text-muted small"
+        >
+            &larr; Back to Module
+        </a>
+
+    </div>
+
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="h3 fw-bold mb-1">
+                Lessons
+            </h2>
+
+            <p class="text-muted small mb-0">
+                Module ID:
+                <strong>#{{ moduleId }}</strong>
+            </p>
+
+        </div>
+
+
+        {% if currentUser.role == 'admin' %}
+
+            <a
+                href="{{
+                    url_for(
+                        'lesson.createLesson',
+                        moduleId=moduleId
+                    )
+                }}"
+                class="btn btn-primary btn-sm"
+            >
+                + Add Lesson
+            </a>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- Lessons -->
+    {% if lessons %}
+
+        <div class="card shadow-sm border-0">
+
+            <div class="card-body p-0">
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle mb-0">
+
+                        <thead class="table-light">
+
+                            <tr>
+
+                                <th
+                                    scope="col"
+                                    class="ps-3"
+                                    style="width: 80px;"
+                                >
+                                    #
+                                </th>
+
+                                <th scope="col">
+                                    Lesson Name
+                                </th>
+
+                                <th scope="col">
+                                    Content
+                                </th>
+
+                                <th
+                                    scope="col"
+                                    class="text-end pe-3"
+                                >
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for lesson in lessons %}
+
+                                <tr>
+
+                                    <td class="ps-3 fw-bold text-primary">
+                                        #{{ loop.index }}
+                                    </td>
+
+
+                                   <td class="fw-semibold">
+
+                                    {% if currentUser.role == 'student' %}
+
+                                        <a
+                                            href="{{ url_for(
+                                                'lesson.getEnrolledLesson',
+                                                enrollmentId=enrollmentId,
+                                                lessonId=lesson.id
+                                            ) }}"
+                                            class="text-decoration-none"
+                                        >
+                                            {{ lesson.lessonName or lesson.lesson_name }}
+                                        </a>
+
+                                    {% else %}
+
+                                        <a
+                                            href="{{ url_for(
+                                                'lesson.getLesson',
+                                                lessonId=lesson.id
+                                            ) }}"
+                                            class="text-decoration-none"
+                                        >
+                                            {{ lesson.lessonName or lesson.lesson_name }}
+                                        </a>
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                    <td class="text-secondary small">
+
+                                        {% if lesson.content %}
+
+                                            {{
+                                                lesson.content[:90]
+                                            }}{% if lesson.content|length > 90 %}...{% endif %}
+
+                                        {% else %}
+
+                                            No content provided
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <td class="text-end pe-3">
+
+                                    {% if currentUser.role == 'student' %}
+
+                                        <a
+                                            href="{{ url_for(
+                                                'lesson.getEnrolledLesson',
+                                                enrollmentId=enrollmentId,
+                                                lessonId=lesson.id
+                                            ) }}"
+                                            class="btn btn-outline-secondary btn-sm me-1"
+                                        >
+                                            View
+                                        </a>
+
+                                    {% else %}
+
+                                        <a
+                                            href="{{ url_for(
+                                                'lesson.getLesson',
+                                                lessonId=lesson.id
+                                            ) }}"
+                                            class="btn btn-outline-secondary btn-sm me-1"
+                                        >
+                                            View
+                                        </a>
+
+                                    {% endif %}
+
+                                        {% if currentUser.role == 'admin' %}
+
+                                            <a
+                                                href="{{
+                                                    url_for(
+                                                        'lesson.updateLesson',
+                                                        lessonId=lesson.id
+                                                    )
+                                                }}"
+                                                class="btn btn-outline-primary btn-sm me-1"
+                                            >
+                                                Edit
+                                            </a>
+
+
+                                            <form
+                                                action="{{
+                                                    url_for(
+                                                        'lesson.deleteLesson',
+                                                        lessonId=lesson.id
+                                                    )
+                                                }}"
+                                                method="POST"
+                                                class="d-inline"
+                                                onsubmit="return confirm('Are you sure you want to delete this lesson?');"
+                                            >
+
+                                                <button
+                                                    type="submit"
+                                                    class="btn btn-outline-danger btn-sm"
+                                                >
+                                                    Delete
+                                                </button>
+
+                                            </form>
+
+                                        {% endif %}
+
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    {% else %}
+
+        <!-- No Lessons -->
+        <div class="card text-center p-5 shadow-sm border-0">
+
+            <div class="card-body">
+
+                <h5 class="text-muted">
+                    No lessons created yet
+                </h5>
+
+                <p class="text-secondary small mb-3">
+                    Add lessons to start building the module content.
+                </p>
+
+
+                {% if currentUser.role == 'admin' %}
+
+                    <a
+                        href="{{
+                            url_for(
+                                'lesson.createLesson',
+                                moduleId=moduleId
+                            )
+                        }}"
+                        class="btn btn-primary btn-sm"
+                    >
+                        Add First Lesson
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

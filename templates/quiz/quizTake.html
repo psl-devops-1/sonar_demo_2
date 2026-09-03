@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Take Quiz - {{ quiz.quiz_name }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2 class="h3 fw-bold mb-1">{{ quiz.quiz_name }}</h2>
+        <p class="text-muted mb-4">{{ quiz.description or '' }}</p>
+
+        {% if questions %}
+        <form method="POST">
+            {% for question in questions %}
+            <div class="card shadow-sm border-0 mb-3">
+                <div class="card-body">
+                    <p class="fw-semibold mb-3">
+                        {{ loop.index }}. {{ question.question_text }}
+                        <span class="text-muted small">({{ question.points }} pt(s))</span>
+                    </p>
+                    {% for option in question.question_options.keys() %}
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="question_{{ question.id }}" id="q{{ question.id }}_{{ loop.index }}" value="{{ option }}" required>
+                        <label class="form-check-label" for="q{{ question.id }}_{{ loop.index }}">{{ option }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">Submit Quiz</button>
+            </div>
+        </form>
+        {% else %}
+        <div class="card text-center p-5 shadow-sm border-0">
+            <div class="card-body">
+                <h5 class="text-muted">This quiz has no questions yet</h5>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

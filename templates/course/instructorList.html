@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+
+{% block title %}Course Instructors - LMS Platform{% endblock %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <!-- Back to Course -->
+    <div class="mb-3">
+        <a
+            href="{{ url_for('course.getCourse', courseId=courseId) }}"
+            class="text-decoration-none text-muted small"
+        >
+            &larr; Back to Course
+        </a>
+    </div>
+
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2 class="h3 fw-bold mb-1">
+                Course Instructors
+            </h2>
+
+            <p class="text-muted small mb-0">
+                Course ID:
+                <strong>#{{ courseId }}</strong>
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- Assigned Instructors -->
+    <div class="card shadow-sm border-0 mb-4">
+
+        <div class="card-header bg-white py-3">
+            <h5 class="fw-bold mb-0">
+                Assigned Instructors
+            </h5>
+        </div>
+
+        <div class="card-body">
+
+            {% if assignments %}
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle mb-0">
+
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Instructor</th>
+                                <th>Email</th>
+
+                                {% if currentUser.role == "admin" %}
+                                    <th class="text-end">
+                                        Actions
+                                    </th>
+                                {% endif %}
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for assignment in assignments %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ loop.index }}
+                                    </td>
+
+                                    <td class="fw-semibold">
+                                        {{ assignment.instructor.name }}
+                                    </td>
+
+                                    <td class="text-muted">
+                                        {{ assignment.instructor.email }}
+                                    </td>
+
+                                    {% if currentUser.role == "admin" %}
+
+                                        <td class="text-end">
+
+                                            <form
+                                                method="POST"
+                                                action="{{
+                                                    url_for(
+                                                        'courseInstructor.removeInstructors',
+                                                        courseInstructorId=assignment.id
+                                                    )
+                                                }}"
+                                                class="d-inline"
+                                                onsubmit="return confirm(
+                                                    'Are you sure you want to remove this instructor?'
+                                                );"
+                                            >
+
+                                                <button
+                                                    type="submit"
+                                                    class="btn btn-outline-danger btn-sm"
+                                                >
+                                                    Remove
+                                                </button>
+
+                                            </form>
+
+                                        </td>
+
+                                    {% endif %}
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            {% else %}
+
+                <div class="text-center py-4">
+
+                    <h6 class="text-muted">
+                        No instructors assigned
+                    </h6>
+
+                    <p class="text-secondary small mb-0">
+                        No instructors have been assigned to this course yet.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- Assign Instructor -->
+    {% if currentUser.role == "admin" %}
+
+        <div class="card shadow-sm border-0">
+
+            <div class="card-header bg-white py-3">
+
+                <h5 class="fw-bold mb-0">
+                    Assign Instructor
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                {% if instructors %}
+
+                    <form
+                        method="POST"
+                        action="{{
+                            url_for(
+                                'courseInstructor.assignInstructors',
+                                courseId=courseId
+                            )
+                        }}"
+                    >
+
+                        <div class="row align-items-end">
+
+                            <div class="col-md-8 mb-3 mb-md-0">
+
+                                <label
+                                    for="instructorId"
+                                    class="form-label fw-semibold"
+                                >
+                                    Select Instructor
+                                </label>
+
+                                <select
+                                    id="instructorId"
+                                    name="instructorId"
+                                    class="form-select"
+                                    required
+                                >
+
+                                    <option value="">
+                                        -- Select Instructor --
+                                    </option>
+
+                                    {% for instructor in instructors %}
+
+                                        <option
+                                            value="{{ instructor.id }}"
+                                        >
+                                            {{ instructor.name }}
+                                            -
+                                            {{ instructor.email }}
+                                        </option>
+
+                                    {% endfor %}
+
+                                </select>
+
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary w-100"
+                                >
+                                    Assign Instructor
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                {% else %}
+
+                    <div class="alert alert-info mb-0">
+
+                        All available instructors are already
+                        assigned to this course.
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

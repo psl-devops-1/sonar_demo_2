@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}{{ course.courseName or course.course_name }} - Details{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="mb-3">
+        <a href="{{ url_for('course.listCourses') }}" class="text-decoration-none text-muted small">&larr; Back to Courses</a>
+    </div>
+
+    <!-- Course Header Card -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <h2 class="fw-bold text-dark mb-2">{{ course.courseName or course.course_name }}</h2>
+                    <p class="text-muted mb-0">{{ course.description or 'No description available.' }}</p>
+                </div>
+                {% if currentUser.role == 'admin' %}
+                <div class="d-flex gap-2">
+                    <a href="{{ url_for('courseInstructor.listInstructors', courseId=course.id) }}" class="btn btn-outline-primary btn-sm">
+                        Instructors
+                    </a>
+
+                    <a href="{{ url_for('course.updateCourse', courseId=course.id) }}"  class="btn btn-outline-secondary btn-sm">
+                    Edit Course
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Modules Navigation Section -->
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+            <h5 class="fw-bold mb-0">Modules</h5>
+            <div class="d-flex gap-2">
+                <a href="{{ url_for('module.listModules', courseId=course.id) }}" class="btn btn-outline-primary btn-sm">
+                    View All Modules &rarr;
+                </a>
+                {% if currentUser.role == 'admin' %}
+                <a href="{{ url_for('module.createModule', courseId=course.id) }}" class="btn btn-primary btn-sm">
+                    + Add Module
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-body text-center py-4">
+            <p class="text-muted small mb-3">Manage and view the list of modules for this course.</p>
+            <a href="{{ url_for('module.listModules', courseId=course.id) }}" class="btn btn-primary btn-sm">
+                Open Course Modules
+            </a>
+        </div>
+    </div>
+
+
+    <div class="mt-4">
+
+    <h4>Course Instructors</h4>
+
+    {% if instructors %}
+
+        <div class="row g-3">
+
+            {% for offering in instructors %}
+
+                <div class="col-md-6">
+
+                    <div class="card shadow-sm">
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+                                {{ offering.instructor.name }}
+                            </h5>
+
+                            <p class="text-muted">
+                                Instructor
+                            </p>
+
+                            {% if currentUser.role == "student" %}
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for(
+                                        'enrollment.enroll',
+                                        courseInstructorId=offering.id
+                                    ) }}"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary"
+                                    >
+                                        Enroll
+                                    </button>
+
+                                </form>
+
+                            {% endif %}
+
+                            {% if currentUser.role == "admin" or currentUser.role == "instructor" %}
+
+                            <a
+                                href="{{ url_for(
+                                    'enrollment.listEnrollmentsForOffering',
+                                    courseInstructorId=offering.id
+                                ) }}"
+                                class="btn btn-outline-primary"
+                            >
+                                View Enrolled Students
+                            </a>
+
+                        {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="alert alert-info">
+            No instructors have been assigned to this course yet.
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+</div>
+{% endblock %}

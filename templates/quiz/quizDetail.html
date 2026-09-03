@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}{{ quiz.quiz_name }} - LMS Platform{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="h3 fw-bold mb-1">{{ quiz.quiz_name }}</h2>
+        <p class="text-muted mb-0">{{ quiz.description or 'No description provided' }}</p>
+    </div>
+    {% if isOwner %}
+        <div class="d-flex gap-2">
+            <a href="{{ url_for('quiz.addQuestion', quizId=quiz.id) }}" class="btn btn-primary btn-sm">+ Add Question</a>
+            <a href="{{ url_for('quiz.quizRecords', quizId=quiz.id) }}" class="btn btn-outline-secondary btn-sm">View Results</a>
+        </div>
+    {% endif %}
+</div>
+
+{% if questions %}
+    <div class="list-group shadow-sm">
+        {% for question in questions %}
+        <div class="list-group-item">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <p class="fw-semibold mb-2">{{ loop.index }}. {{ question.question_text }}</p>
+                    <ul class="mb-0 small text-secondary">
+                        {% for option, isCorrect in question.question_options.items() %}
+                            <li class="{{ 'text-success fw-semibold' if isCorrect and isOwner else '' }}">
+                                {{ option }}{% if isCorrect and isOwner %} (correct){% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <span class="badge bg-light text-dark mt-2">{{ question.points }} pt(s)</span>
+                </div>
+                {% if isOwner %}
+                <form action="{{ url_for('quiz.deleteQuestion', quizId=quiz.id, questionId=question.id) }}" method="POST" onsubmit="return confirm('Delete this question?');">
+                    <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="card text-center p-5 shadow-sm border-0">
+        <div class="card-body">
+            <h5 class="text-muted">No questions yet</h5>
+            {% if isOwner %}
+                <p class="text-secondary small mb-3">Add questions so students can take this quiz.</p>
+                <a href="{{ url_for('quiz.addQuestion', quizId=quiz.id) }}" class="btn btn-primary btn-sm">+ Add Question</a>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

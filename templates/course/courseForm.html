@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}{% if form.courseName.data %}Edit Course{% else %}Create Course{% endif %} - LMS Platform{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white py-3">
+                <h3 class="h5 mb-0 fw-bold">
+                    {% if form.courseName.data %}Edit Course{% else %}Create New Course{% endif %}
+                </h3>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+
+                    <!-- Course Name Field -->
+                    <div class="mb-3">
+                        {{ form.courseName.label(class="form-label fw-semibold") }}
+                        {{ form.courseName(class="form-control " ~ ("is-invalid" if form.courseName.errors else ""), placeholder="e.g. Introduction to Python Programming") }}
+                        {% if form.courseName.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.courseName.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Description Field -->
+                    <div class="mb-4">
+                        {{ form.description.label(class="form-label fw-semibold") }}
+                        {{ form.description(class="form-control " ~ ("is-invalid" if form.description.errors else ""), rows="5", placeholder="Briefly summarize what this course covers...") }}
+                        {% if form.description.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.description.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{{ url_for('course.listCourses') }}" class="btn btn-outline-secondary btn-sm">Cancel</a>
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

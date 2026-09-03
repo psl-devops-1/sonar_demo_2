@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Material - LMS Platform{% endblock %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <!-- Back -->
+    <div class="mb-3">
+
+        <a
+            href="{{ url_for(
+                'material.listMaterials',
+                lessonId=lessonId
+            ) }}"
+            class="text-decoration-none text-muted small"
+        >
+            &larr; Back to Materials
+        </a>
+
+    </div>
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-header bg-white py-3">
+
+                    <h4 class="fw-bold mb-0">
+                        Upload Material
+                    </h4>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    <form
+                        method="POST"
+                        enctype="multipart/form-data"
+                        novalidate
+                    >
+
+                        {{ form.hidden_tag() }}
+
+                        <!-- File -->
+                        <div class="mb-4">
+
+                            {{ form.file.label(
+                                class="form-label fw-semibold"
+                            ) }}
+
+                            {{ form.file(
+                                class="form-control " ~
+                                ("is-invalid"
+                                if form.file.errors else "")
+                            ) }}
+
+                            {% for error in form.file.errors %}
+
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                            <div class="form-text">
+                                Allowed: PDF, PNG, JPG, JPEG, MP4, DOCX, PPTX.
+                                Maximum size: 50 MB.
+                            </div>
+
+                        </div>
+
+                        <!-- Access -->
+                        <div class="mb-4">
+
+                            {{ form.access.label(
+                                class="form-label fw-semibold"
+                            ) }}
+
+                            {{ form.access(
+                                class="form-select " ~
+                                ("is-invalid"
+                                if form.access.errors else "")
+                            ) }}
+
+                            {% for error in form.access.errors %}
+
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                            <div class="form-text">
+                                Public materials can be accessed by
+                                permitted students. Enrolled-only materials
+                                are restricted to enrolled students.
+                            </div>
+
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="d-flex justify-content-between">
+
+                            <a
+                                href="{{ url_for(
+                                    'material.listMaterials',
+                                    lessonId=lessonId
+                                ) }}"
+                                class="btn btn-outline-secondary"
+                            >
+                                Cancel
+                            </a>
+
+                            {{ form.submit(
+                                class="btn btn-primary"
+                            ) }}
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
