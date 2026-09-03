@@ -27,9 +27,9 @@ pipeline {
                     def scannerHome = tool 'SonarQubeScanner'
 
                     withSonarQubeEnv('sonar-server') {
-                        dir('p1_0') {
+                       
                             bat "\"${scannerHome}\\bin\\sonar-scanner.bat\""
-                        }
+                    
                     }
                 }
             }
@@ -45,9 +45,9 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                dir('p1_0') {
+                
                     bat 'docker build -t midblue12/flask-lms:latest .'
-                }
+              
             }
         }
 
