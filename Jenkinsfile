@@ -12,12 +12,12 @@ pipeline {
 
         stage('Test') {
             steps {
-                dir('p1_0') {
+                
                     bat '''
                         python --version
                         python -m pip install -r requirements.txt                       
                     '''
-                }
+                
             }
         }
 
